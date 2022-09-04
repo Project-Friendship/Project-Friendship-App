@@ -116,4 +116,30 @@ router.delete('/', (request, response) => {
 		   throw err;
 	       }));
 })
+
+/**
+ * @swagger  
+ * /events:
+ *  get:
+ *    description: returns all events for child
+ *    responses:
+ *      '200':
+ *        description: all child events returned
+ */
+router.put('/cid', (request, response) => {
+    let { cid } = request.body;
+	
+	console.log("Return all events for given cid: " + cid)
+    pool.query('SELECT * from events_summary WHERE cid = $1', [cid])
+	.then(res => {
+	    console.log('DB response: ' + JSON.stringify(res.rows));
+	    response.send(res.rows);
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
+
 module.exports = router;

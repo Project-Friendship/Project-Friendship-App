@@ -21,12 +21,11 @@ router.delete('/', (request, response) => {
 
 
 router.post('/', (request, response) => {
-    let sid = request.body.sid;
-    let email = request.body.email;
+    const { sid, email, notiftoken } = request.body;
 
 	console.log(`Got request to add a session, will add ${sid},${email} to database`);
-    pool.query('INSERT INTO sessions (sid, email) VALUES ($1, $2)',
-	       [sid, email])
+    pool.query('INSERT INTO sessions (sid, email, notiftoken) VALUES ($1, $2, $3)',
+	       [sid, email, notiftoken])
 	.then(res => {
 	    console.log('DB response: ' + res.rows[0]);
 	    response.sendStatus(200)
@@ -51,5 +50,37 @@ router.put('/', (request, response) => {
 		   throw err;
 	       }));
 })
+
+router.put('/getToken', (request, response) => {
+    console.log(`Got request for token given an email`);
+    let { email } = request.body;
+	console.log("Get token by email: " + email)
+    pool.query('SELECT notiftoken from sessions where email = $1', [email])
+	.then(res => {
+	    console.log('DB response: ' + JSON.stringify(res.rows[0]));
+	    response.send(res.rows[0]);
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
+// router.put('/cid', (request, response) => {
+//     let { cid } = request.body;
+	
+// 	console.log("Return all events for given cid: " + cid)
+//     pool.query('SELECT * from events_summary WHERE cid = $1', [cid])
+// 	.then(res => {
+// 	    console.log('DB response: ' + JSON.stringify(res.rows));
+// 	    response.send(res.rows);
+// 	})
+// 	.catch(err =>
+// 	       setImmediate(() => {
+// 		   throw err;
+// 	       }));
+// })
+
+
 
 module.exports = router;

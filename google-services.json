@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "83414050974",
+    "project_id": "project-friendship-344505",
+    "storage_bucket": "project-friendship-344505.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83414050974:android:b850f850ea7fe72f84738f",
+        "android_client_info": {
+          "package_name": "com.pf.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83414050974-4d3g7vekpfa6c0tmac0t8hi5k62m93bm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFhdOJk2BhmuBfvrmF1UsVu0wl5hCNJz4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83414050974-4d3g7vekpfa6c0tmac0t8hi5k62m93bm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "83414050974-8ekpa872o804mkbrbdpi0bo8nle9ckav.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "host.exp.exponent"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

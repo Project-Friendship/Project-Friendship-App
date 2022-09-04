@@ -1,3 +1,5 @@
+drop table child;
+
 create table child (
     cid primary key,
     fname text,

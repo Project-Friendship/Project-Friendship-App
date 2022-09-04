@@ -9,6 +9,11 @@ create table users (
     phone text,
     pronouns text
 );
+
+-- important inserts to begin:
+INSERT INTO users (email, fname, lname, role, phone, pronouns) VALUES ('null', '', '', '', '', '', '');
+INSERT INTO users (email, fname, lname, role, phone, pronouns) VALUES ('kahnareeba@gmail.com', 'Areeba', 'Khan', 'admin', '314-745-9208', 'She/her/hers');
+
 -- example insert
 -- INSERT INTO users (email, fname, lname, role, phone) VALUES ('khan6@stolaf.edu', 'Areeba', 'Khan', 'mentor', '123-456-7890', 'She/her/hers');
 
@@ -16,9 +21,10 @@ create table users (
 -- ALTER TABLE users ADD COLUMN IF NOT EXISTS pronouns text;
 
 
--- create function addUser(email, fname, lname, role) returns
-
 -- table of users that have requested to sign up
+
+drop table registerRequests;
+
 create table registerRequests (
     email text primary key,
     fname text,
@@ -34,14 +40,17 @@ create table registerRequests (
 --     role text
 -- );
 
--- create table sessions (
---     sid text primary key, -- secure session key
---     email text            -- authenticated email 
--- );
+drop table sessions;
 
--- create function email(text) returns text as $$
---     select email from sessions where sid = $1;
--- $$ language 'sql';
+create table sessions (
+    sid text primary key, -- secure session key
+    email text,            -- authenticated email 
+    notiftoken text
+);
+
+create function email(text) returns text as $$
+    select email from sessions where sid = $1;
+$$ language 'sql';
 
 -- -- postgres function update_profile()
 -- --    3 args type text: email, fname, lname, role, phone
